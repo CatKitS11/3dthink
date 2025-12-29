@@ -1,14 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import Navbar from "@/components/navbar";
+
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="relative flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+      <Navbar className="fixed top-0 left-0 right-0 bg-white/50 backdrop-blur-md dark:bg-black/50 z-50" />
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
+          src="/3dthink_ic.png"
+          alt="3DThink logo"
           width={200}
           height={200}
           priority
@@ -66,6 +69,14 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             Test Link
+          </Link>
+          <Link
+            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
+            href="/test3d2"
+            // target="_blank"
+            // rel="noopener noreferrer"
+          >
+            Test Link2
           </Link>
         </div>
       </main>
