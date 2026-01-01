@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Hero from "@/components/hero";
 
 import Navbar from "@/components/navbar";
 
@@ -7,16 +8,17 @@ export default function Home() {
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <Navbar className="fixed top-0 left-0 right-0 bg-white/50 backdrop-blur-md dark:bg-black/50 z-50" />
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
+      <Hero />
+      {/* <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start"> */}
+        {/* <Image
           className="dark:invert"
           src="/3dthink_ic.png"
           alt="3DThink logo"
           width={200}
           height={200}
           priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
+        /> */}
+        {/* <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
             To get started, edit the page.tsx file.
           </h1>
@@ -78,8 +80,16 @@ export default function Home() {
           >
             Test Link2
           </Link>
-        </div>
-      </main>
+          <Link
+            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
+            href="/test3d3"
+            // target="_blank"
+            // rel="noopener noreferrer"
+          >
+            Test Link3
+          </Link>
+        </div> */}
+      {/* </main> */}
     </div>
   );
 }
