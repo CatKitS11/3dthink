@@ -11,19 +11,22 @@ const Navbar = ({ className }: { className?: string }) => {
     <nav className={cn("h-16 bg-background border-b", className)}>
       <div className="h-full flex items-center justify-between max-w-(--breakpoint-xl) mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-12">
-          <Logo />
+          <Logo className="h-15 w-15"/>
 
           {/* Desktop Menu */}
           <NavMenu className="hidden md:block" />
         </div>
 
         <div className="flex items-center gap-3">
-          <Link href="/test3d">
+          <Link href="/sign-in">
             <Button variant="outline" className="hidden sm:inline-flex">
               Sign In
             </Button>
           </Link>
-          <Button>Sign Up</Button>
+          <Link href="/sign-up">
+            <Button>Sign Up</Button>
+          </Link>
+
           {/* <Button size="icon" variant="outline">
             <SunIcon />
           </Button> */}
