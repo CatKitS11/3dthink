@@ -16,8 +16,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { GithubIcon } from "@/components/icon";
+// import { GithubIcon } from "@/components/icon";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+
+import { useState } from "react";
+import { SpinnerCustom } from "@/components/ui/spinner";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -26,6 +30,8 @@ const formSchema = z.object({
 
 const Login = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       email: "",
@@ -34,9 +40,28 @@ const Login = () => {
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setLoading(true);
+    setError("");
     console.log(data.email);
+    const { error } = await authClient.signIn.email({
+      email: data.email,
+      password: data.password,
+      callbackURL: "/",
+    });
+    if (error) {
+      setError(error.message || "Login failed");
+    }
+    setLoading(false);
   };
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -102,9 +127,8 @@ const Login = () => {
             Log in to 3DThink
           </p>
 
-          <Button className="mt-8 w-full gap-3">
-            <GoogleLogo />
-            Continue with Google
+          <Button className="mt-8 w-full gap-3" onClick={handleGoogleSignIn} disabled={loading}>
+            {loading ? (<><SpinnerCustom />Login...</>) : (<><GoogleLogo />Login with Google</>)}
           </Button>
           {/* <Button className="mt-8 w-full gap-3">
             <GithubIcon />
@@ -158,8 +182,8 @@ const Login = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
-                Continue with Email
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? <SpinnerCustom /> : "Sign in with Email"}
               </Button>
             </form>
           </Form>

@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 import { NavMenu } from "@/components/nav-menu";
 import { NavigationSheet } from "@/components/navigation-sheet";
-import { SunIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -20,7 +19,7 @@ const Navbar = ({ className }: { className?: string }) => {
         <div className="flex items-center gap-3">
           <Link href="/sign-in">
             <Button variant="outline" className="hidden sm:inline-flex">
-              Sign In
+              Login
             </Button>
           </Link>
           <Link href="/sign-up">

@@ -17,11 +17,11 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
-import { GithubIcon } from "@/components/icon";
 
 import { useState } from "react";
 
 import { authClient } from "@/lib/auth-client";
+import { SpinnerCustom } from "@/components/ui/spinner";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -43,8 +43,8 @@ const SignUp = () => {
     resolver: zodResolver(formSchema),
   });
 
-   // EDIT: แก้ไข onSubmit ให้ใช้ Better Auth
-   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  // EDIT: แก้ไข onSubmit ให้ใช้ Better Auth
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setLoading(true);
     setError("");
 
@@ -73,14 +73,6 @@ const SignUp = () => {
     await authClient.signIn.social({
       provider: "google",
       callbackURL: "/",
-    });
-  };
-
-  const handleGithubSignIn = async () => {
-    setLoading(true);
-    await authClient.signIn.social({
-      provider: "github",
-      callbackURL: "/dashboard",
     });
   };
 
@@ -148,8 +140,8 @@ const SignUp = () => {
             Sign up for 3DThink
           </p>
 
-          <Button className="mt-8 w-full gap-3" onClick={handleGoogleSignIn}>
-            <GoogleLogo />
+          <Button className="mt-8 w-full gap-3" onClick={handleGoogleSignIn} disabled={loading}>
+            {loading ? <SpinnerCustom /> : <GoogleLogo />}
             Continue with Google
           </Button>
           {/* <Button className="mt-8 w-full gap-3">
@@ -228,7 +220,7 @@ const SignUp = () => {
               )}
 
               <Button type="submit" className="mt-4 w-full" disabled={loading}>
-                {loading ? "Creating account..." : "Continue with Email"}
+                {loading ? (<><SpinnerCustom />Creating account...</>) : "Continue with Email"}
               </Button>
             </form>
           </Form>
