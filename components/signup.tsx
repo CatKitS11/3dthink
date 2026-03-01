@@ -18,23 +18,70 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { GithubIcon } from "@/components/icon";
+
+import { useState } from "react";
+
+import { authClient } from "@/lib/auth-client";
+
 const formSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email(),
   password: z.string().min(8, "Password must be at least 8 characters long"),
 });
 
 const SignUp = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
+   // EDIT: แก้ไข onSubmit ให้ใช้ Better Auth
+   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setLoading(true);
+    setError("");
+
+    const { error } = await authClient.signUp.email({
+      email: data.email,
+      password: data.password,
+      name: data.name,
+      callbackURL: "/",
+    }, {
+      onSuccess: () => {
+        router.push("/");
+      },
+      onError: (ctx) => {
+        setError(ctx.error.message);
+      },
+    });
+
+    if (error) {
+      setError(error.message || "Sign up failed");
+    }
+    setLoading(false);
+  };
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
+  };
+
+  const handleGithubSignIn = async () => {
+    setLoading(true);
+    await authClient.signIn.social({
+      provider: "github",
+      callbackURL: "/dashboard",
+    });
   };
 
   return (
@@ -101,14 +148,14 @@ const SignUp = () => {
             Sign up for 3DThink
           </p>
 
-          <Button className="mt-8 w-full gap-3">
+          <Button className="mt-8 w-full gap-3" onClick={handleGoogleSignIn}>
             <GoogleLogo />
             Continue with Google
           </Button>
-          <Button className="mt-8 w-full gap-3">
+          {/* <Button className="mt-8 w-full gap-3">
             <GithubIcon />
             Continue with Github
-          </Button>
+          </Button> */}
 
           <div className="my-7 w-full flex items-center justify-center overflow-hidden">
             <Separator />
@@ -121,6 +168,24 @@ const SignUp = () => {
               className="w-full space-y-4"
               onSubmit={form.handleSubmit(onSubmit)}
             >
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder="Your name"
+                        className="w-full"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="email"
@@ -157,15 +222,20 @@ const SignUp = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="mt-4 w-full">
-                Continue with Email
+
+              {error && (
+                <p className="text-red-500 text-sm text-center">{error}</p>
+              )}
+
+              <Button type="submit" className="mt-4 w-full" disabled={loading}>
+                {loading ? "Creating account..." : "Continue with Email"}
               </Button>
             </form>
           </Form>
 
           <p className="mt-5 text-sm text-center">
             Already have an account?
-            <Link href="/sign-in" className="ml-1 underline text-muted-foreground">
+            <Link href="/sign-in" replace className="ml-1 underline text-muted-foreground">
               Log in
             </Link>
           </p>

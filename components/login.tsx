@@ -35,7 +35,7 @@ const Login = () => {
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
+    console.log(data.email);
   };
 
   return (
@@ -106,10 +106,10 @@ const Login = () => {
             <GoogleLogo />
             Continue with Google
           </Button>
-          <Button className="mt-8 w-full gap-3">
+          {/* <Button className="mt-8 w-full gap-3">
             <GithubIcon />
             Continue with Github
-          </Button>
+          </Button> */}
 
           <div className="my-7 w-full flex items-center justify-center overflow-hidden">
             <Separator />
