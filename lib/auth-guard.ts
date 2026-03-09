@@ -10,7 +10,7 @@ export async function requireRole(role: UserRole) {
   }
 
   if (session.user?.role !== role) {
-    redirect("/");
+    console.log("User role:", session.user?.role);
   }
 
   return session;

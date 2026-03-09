@@ -1,4 +1,4 @@
-
+/// Backend 
 export interface User {
   id: string;
   email: string;
@@ -13,3 +13,12 @@ export interface Session {
 }
 
 export type UserRole = "USER" | "ADMIN" | "GUEST";
+
+export type ClientSessionType = {
+  user: {
+    id: string;
+    name: string;
+    email?: string;
+    role: UserRole;
+  };
+};
