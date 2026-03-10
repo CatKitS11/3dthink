@@ -1,6 +1,6 @@
 import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
-import type { UserRole } from "@/type/auth.type";
+import type { UserRole } from "@/types/auth.type";
 
 export async function requireRole(role: UserRole) {
   const session = await getSession();

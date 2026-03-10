@@ -14,12 +14,7 @@ const Navbar = async ({ className }: { className?: string }) => {
   const session = await getSession();
   const user = session?.user ?? null;
 
-  console.log("Session in Navbar:", session);
-  console.log("User in Navbar:", user);
-  console.log("User role:", user?.role);
-
   const hasUser = !!user;
-  console.log("hasUser:", hasUser);
 
   const handleLogout = async () => {
     "use server";

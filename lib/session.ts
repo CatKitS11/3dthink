@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
-import type { Session } from "@/type/auth.type";
+import type { Session } from "@/types/auth.type";
 
 export async function getSession(): Promise<Session | null> {
   const headersList = await headers();

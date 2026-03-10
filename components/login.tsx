@@ -16,12 +16,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-// import { GithubIcon } from "@/components/icon";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 
 import { useState } from "react";
 import { SpinnerCustom } from "@/components/ui/spinner";
+
+import { redirectByRole } from "@/lib/auth-redirect-by-role";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -43,25 +44,37 @@ const Login = () => {
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setLoading(true);
     setError("");
-    console.log(data.email);
-    const { error } = await authClient.signIn.email({
-      email: data.email,
-      password: data.password,
-      callbackURL: "/",
-    });
-    if (error) {
-      setError(error.message || "Login failed");
+    try {
+      const result = await authClient.signIn.email({
+        email: data.email,
+        password: data.password,
+        callbackURL: "/auth/callback",
+      });
+      if (result.error) {
+        setError(result.error.message || "Login failed");
+        return;
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
-    await authClient.signIn.social({
-      provider: "google",
-      callbackURL: "/",
-    });
-  }
+    try {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/auth/callback",
+      });
+    } catch (error) {
+      console.error("Google sign in failed:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center">
