@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import type { ClientSessionType } from "@/type/auth.type";
+import type { ClientSessionType } from "@/types/auth.type";
 
 export default function Test3DPage() {
   const containerRef = useRef<HTMLDivElement>(null);

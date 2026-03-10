@@ -4,7 +4,7 @@ import Hero from "@/components/hero";
 
 import Navbar from "@/components/navbar";
 import FeaturesPage from "@/components/feature";
-import Footer from '@/components/shadcn-studio/blocks/footer-component-01/footer-component-01'
+import FooterPage from '@/components/footer'
 import { BackgroundPattern } from "@/components/background-pattern";
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
         <div className="pt-16">
           <Hero />
           <FeaturesPage />
-          <Footer />
+          <FooterPage />
         </div>
       </div>
     </>

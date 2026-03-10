@@ -3,7 +3,7 @@
 // import Test3DComponent from "@/components/test3d";
 
 import { requireRole } from "@/lib/auth-guard";
-import type { UserRole } from "@/type/auth.type";
+import type { UserRole } from "@/types/auth.type";
 import Test3DComponent from "@/components/test3d";
  
 export default async function Test3DPage() {
