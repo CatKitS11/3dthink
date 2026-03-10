@@ -59,8 +59,12 @@ const featuresList = [
   }
 ]
 
-const FeaturesPage = () => {
-  return <Features featuresList={featuresList} />
+const FeaturesPage = ({className}: {className?: string}) => {
+  return (
+    <div className={className}>
+      <Features featuresList={featuresList} />
+    </div>
+  )
 }
 
 export default FeaturesPage
