@@ -4,7 +4,7 @@ export function redirectByRole(role?: UserRole) {
   switch (role) {
     case "ADMIN":
     case "SUPER_ADMIN":
-      return "/admin/dashboard";
+      return "/admin/cms";
     case "USER":
       return "/dashboard";
     default:
