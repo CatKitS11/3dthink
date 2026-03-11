@@ -15,3 +15,20 @@ export async function requireRole(role: UserRole) {
 
   return session;
 }
+
+export function isGuest() {
+  return requireRole("GUEST");
+}
+
+export function isUserRole(role?: UserRole) {
+  return role === "USER";
+}
+
+export function isAdminRole(role?: UserRole) {
+  return role === "ADMIN" || role === "SUPER_ADMIN";
+}
+
+
+export function isSuperAdminRole(role?: UserRole) {
+  return role === "SUPER_ADMIN";
+}

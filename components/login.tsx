@@ -22,7 +22,6 @@ import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
 import { SpinnerCustom } from "@/components/ui/spinner";
 
-import { redirectByRole } from "@/lib/auth-redirect-by-role";
 
 const formSchema = z.object({
   email: z.string().email(),

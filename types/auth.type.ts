@@ -12,4 +12,4 @@ export interface Session {
   user: User | null;
 }
 
-export type UserRole = "USER" | "ADMIN" | "GUEST";
+export type UserRole = "USER" | "ADMIN" | "GUEST" | "SUPER_ADMIN";
