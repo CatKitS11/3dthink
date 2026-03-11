@@ -4,6 +4,13 @@ import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider"
 
+// #### preloading fonts ####
+// import { Inter } from "next/font/google"
+
+// const inter = Inter({
+//   subsets: ["latin"],
+// });
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

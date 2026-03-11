@@ -62,4 +62,5 @@ enum Role {
   GUEST
   USER
   ADMIN
+  SUPER_ADMIN
 }

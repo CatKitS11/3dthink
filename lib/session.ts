@@ -11,8 +11,6 @@ export async function getSession(): Promise<Session | null> {
     headers: headerObject,
   });
 
-  console.log("Session from getSession:", session);
-
   return session as Session | null;
 }
 
