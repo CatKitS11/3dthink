@@ -25,12 +25,12 @@ export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => (
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="#">About</Link>
+          <Link href="https://www.catkits.work" target="_blank">About Me</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="#">Contact Us</Link>
+          <Link href="#">Contact Me</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
     </NavigationMenuList>

@@ -23,13 +23,13 @@ const Features = ({ featuresList }: { featuresList: Features }) => {
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         {/* Header */}
         <div className='mb-12 space-y-4 sm:mb-16 lg:mb-24'>
-          <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>Discover the Exclusive Perks Today</h2>
+          <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>Powerful Tools for 3D Creation</h2>
           <p className='text-muted-foreground text-xl'>
-            Explore key features designed to enhance your shopping experience with intuitive navigation, robust
-            security, and seamless functionality.
+            Generate assets with AI, build immersive 3D scenes,
+            and explore spaces through real-time walkthroughs.
           </p>
           <Button variant='outline' className='rounded-lg text-base shadow-none has-[>svg]:px-6' size='lg' asChild>
-            <a href='#'>
+            <a href='#features'>
               See all features
               <ArrowRightIcon />
             </a>

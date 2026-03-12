@@ -16,6 +16,8 @@ const Navbar = async ({ className }: { className?: string }) => {
 
   const hasUser = !!user;
 
+  const userName = user?.name?.replace(/\s+.+$/, "").replace(/^\w/g, (i) => i.toUpperCase());
+
   const handleLogout = async () => {
     "use server";
   try {
@@ -30,8 +32,11 @@ const Navbar = async ({ className }: { className?: string }) => {
   return (
     <nav className={cn("h-16 bg-background border-b", className)}>
       <div className="h-full flex items-center justify-between max-w-(--breakpoint-xl) mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-12">
-          <Logo className="h-15 w-15" />
+        <div className="flex items-center gap-10">
+          <div className="flex items-center gap-2">
+            <Logo className="h-15 w-15" />
+            <span className='text-xl font-semibold'>3DThink</span>
+          </div>
 
           {/* Desktop Menu */}
           <NavMenu className="hidden md:block" />
@@ -40,7 +45,7 @@ const Navbar = async ({ className }: { className?: string }) => {
         <div className="flex items-center gap-3">
           {hasUser ? (
             <div className="flex items-center gap-3">
-              <span>{user?.name}</span>
+              <span>{userName}</span>
               <AvatarSizeDemo image={user?.image} />
               <form action={handleLogout}>
                 <Button type="submit">Log out</Button>

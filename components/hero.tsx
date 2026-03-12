@@ -14,27 +14,29 @@ export default function Hero() {
           asChild
         >
           <Link href="#">
-            Just released v1.0.0 <ArrowUpRight className="ml-1 size-4" />
+            Just released v0.0.2 <ArrowUpRight className="ml-1 size-4" />
           </Link>
         </Badge>
         <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl md:leading-[1.2] font-semibold tracking-tighter">
-          Customized Shadcn UI Blocks & Components
+          AI-Powered 3D Visualization Platform
         </h1>
         <p className="mt-6 md:text-lg text-foreground/80">
-          Explore a collection of Shadcn UI blocks and components, ready to
-          preview and copy. Streamline your development workflow with
-          easy-to-implement examples.
+          Create stunning 3D environments, generate assets with AI,
+          and explore spaces through immersive real-time walkthroughs.
+          All directly in your browser.
         </p>
         <div className="mt-12 flex items-center justify-center gap-4">
+          <Link href="#features">
           <Button size="lg" className="rounded-full text-base">
-            Get Started <ArrowUpRight className="h-5! w-5!" />
+            Start Creating <ArrowUpRight className="h-5! w-5!" />
           </Button>
+          </Link>
           <Button
             variant="outline"
             size="lg"
             className="rounded-full text-base shadow-none"
           >
-            <CirclePlay className="h-5! w-5!" /> Watch Demo
+            <CirclePlay className="h-5! w-5!" /> Explore Demo
           </Button>
         </div>
       </div>

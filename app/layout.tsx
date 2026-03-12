@@ -37,7 +37,11 @@ export default function RootLayout({
   modal: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className="scroll-smooth bg-zinc-50 dark:bg-black"
+    >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
