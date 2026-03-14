@@ -126,7 +126,7 @@ function CameraRig() {
 export default function ThreeDBackground() {
   return (
     <div
-      className="fixed inset-0 -z-10"
+      className="absolute inset-0 -z-10"
       style={{ pointerEvents: "none" }}
     >
       <Canvas

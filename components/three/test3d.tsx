@@ -2,21 +2,17 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { authClient } from "@/lib/auth-client";
-import Link from "next/link";
-import type { ClientSessionType } from "@/types/auth.type";
 
 export default function Test3DPage() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { data: session } = authClient.useSession() as unknown as { data: ClientSessionType };   
 
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // 1. Creating the scene (สร้างฉาก)
+    // 1. Creating the scene
     const scene = new THREE.Scene();
 
-    // 2. Creating the camera (สร้างกล้อง)
+    // 2. Creating the camera
     // PerspectiveCamera(องศาการมอง, อัตราส่วนหน้าจอ, ระยะใกล้สุดที่เห็น, ระยะไกลสุดที่เห็น)
     const camera = new THREE.PerspectiveCamera(
       50,
@@ -25,16 +21,16 @@ export default function Test3DPage() {
       1000
     );
 
-    // 3. Creating the renderer (สร้างตัววาดภาพ)
+    // 3. Creating the renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     
     // นำ canvas ของ Three.js ไปใส่ใน div ที่เราเตรียมไว้
     containerRef.current.appendChild(renderer.domElement);
 
-    // 4. Adding a cube (สร้างกล่องสี่เหลี่ยมตามตัวอย่างในคู่มือ)
+    // 4. Adding a cube
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true }); // สีเขียว
+    const material = new THREE.MeshBasicMaterial({ color: 0x0202FA, wireframe: true }); // color: 0x0202FA = blue
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
@@ -62,7 +58,7 @@ export default function Test3DPage() {
 
     window.addEventListener("resize", handleResize);
 
-    // Cleanup: ล้างทรัพยากรเมื่อปิดหน้าหน้านี้
+    // Cleanup when component unmounts
     return () => {
       window.removeEventListener("resize", handleResize);
       if (containerRef.current) {
@@ -75,19 +71,8 @@ export default function Test3DPage() {
   }, []);
 
   return (
-    <div className="relative w-full h-screen bg-black">
-      {/* ส่วนที่ Three.js จะวาดภาพลงไป */}
-      <div ref={containerRef} className="w-full h-full" />
-      
-      {/* ปุ่มกดกลับหน้าหลัก */}
-      <div className="absolute top-10 left-10 text-white z-10">
-        <h1 className="text-2xl font-bold mb-4">Three.js Test Scene</h1>
-        <span className="block mb-2">User: {session?.user?.name}</span>
-        <span className="block mb-2">Role: {session?.user?.role}</span>
-        <Link href="/" className="px-4 py-2 bg-white/20 hover:bg-white/40 rounded-lg transition">
-          ← Back to Home
-        </Link>
-      </div>
+    <div className="absolute inset-0 z-[-7]">
+      <div ref={containerRef} className="" />
     </div>
   );
 }
