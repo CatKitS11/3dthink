@@ -10,8 +10,9 @@ import { BackgroundPattern } from "@/components/background-pattern";
 export default function Home() {
   return (
     <>
-      <div className="relative flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+      <div className="relative flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black z-1">
         <BackgroundPattern />
+        
         <Navbar className="fixed top-0 left-0 right-0 bg-white/50 backdrop-blur-md dark:bg-black/50 z-50" />
         <div className="pt-16">
           <Hero />

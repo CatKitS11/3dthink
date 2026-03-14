@@ -2,11 +2,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, CirclePlay } from "lucide-react";
 import Link from "next/link";
+import ThreeDBackground from "@/components/three/threebackground";
 
 export default function Hero() {
   return (
     <div className="min-h-screen flex items-center justify-center px-6">
-
+      <ThreeDBackground />
       <div className="relative z-10 text-center max-w-3xl">
         <Badge
           variant="secondary"

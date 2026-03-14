@@ -7,7 +7,7 @@ import Link from "next/link";
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { getSession , logout} from "@/lib/session";
+import { getSession, logout } from "@/lib/session";
 import AvatarSizeDemo from "./shadcn-studio/avatar/avatar-04";
 
 const Navbar = async ({ className }: { className?: string }) => {
@@ -16,18 +16,20 @@ const Navbar = async ({ className }: { className?: string }) => {
 
   const hasUser = !!user;
 
-  const userName = user?.name?.replace(/\s+.+$/, "").replace(/^\w/g, (i) => i.toUpperCase());
+  const userName = user?.name
+    ? user.name.trim().split(/\s+/)[0].replace(/^\w/, (c) => c.toUpperCase())
+    : "User";
 
   const handleLogout = async () => {
     "use server";
-  try {
-    await logout();
-    revalidatePath("/");
-    redirect("/");
-  } catch (error) {
-    console.error("Logout failed:", error);
-  }
-};
+    try {
+      await logout();
+      revalidatePath("/");
+      redirect("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   return (
     <nav className={cn("h-16 bg-background border-b", className)}>
