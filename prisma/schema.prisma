@@ -18,6 +18,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   role          Role      @default(GUEST)
+  userInteractions  UserFeature[]
 }
 
 model Session {
@@ -63,4 +64,49 @@ enum Role {
   USER
   ADMIN
   SUPER_ADMIN
+}
+
+// 1. for controlling Hero Section
+model HeroContent {
+  id          String   @id @default(cuid())
+  badgeText   String?  // e.g. "Just released v0.0.2"
+  title       String   // e.g. "Next-Gen 3D Experiences"
+  description String   // main description
+  primaryBtn  String   // primary button text
+  secondaryBtn String  // secondary button text
+  isActive    Boolean  @default(true)
+  updatedAt   DateTime @updatedAt
+}
+
+// 2. for managing Feature Cards
+model FeatureCard {
+  id              String        @id @default(cuid())
+  icon            String        // store icon name (e.g. "BoxIcon")
+  title           String
+  description     String
+  status          FeatureStatus @default(ACTIVE)
+  displayOrder    Int           @default(0)
+  isRecentOnly    Boolean       @default(false) // for checking if it's a new feature
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  userInteractions UserFeature[] // relationship with User
+}
+
+enum FeatureStatus {
+  ACTIVE      // normal usage (Guest/User can see)
+  BETA_TEST   // testing (Admin/Super Admin can see)
+  DISABLE     // disabled (no one can see on website, but Admin can see in system)
+  HIDING      // hidden (stored for future use)
+}
+
+// 3. for storing user interaction history (Dashboard)
+model UserFeature {
+  id         String      @id @default(cuid())
+  userId     String
+  featureId  String
+  lastUsedAt DateTime    @default(now())
+  user       User        @relation(fields: [userId], references: [id])
+  feature    FeatureCard @relation(fields: [featureId], references: [id])
+
+  @@unique([userId, featureId])
 }
