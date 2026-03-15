@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar";
 import FeaturesPage from "@/components/feature";
 import FooterPage from '@/components/footer'
 import { BackgroundPattern } from "@/components/background-pattern";
+import ThreeDBackground from "@/components/three/threebackground";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         
         <Navbar className="fixed top-0 left-0 right-0 bg-white/50 backdrop-blur-md dark:bg-black/50 z-50" />
         <div className="pt-16">
+          <ThreeDBackground />
           <Hero />
           <FeaturesPage />
           <FooterPage />

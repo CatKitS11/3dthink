@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
   Object3D,
@@ -126,15 +126,15 @@ function CameraRig() {
 export default function ThreeDBackground() {
   return (
     <div
-      className="absolute inset-0 -z-10"
+      className="absolute top-[-50%] left-0 right-0 bottom-0 inset-0 -z-10"
       style={{ pointerEvents: "none" }}
     >
       <Canvas
         camera={{
           position: [0, 30, 80],
-          fov: 60,
+          fov: 90,
           near: 0.1,
-          far: 500,
+          far: 1500,
         }}
         dpr={[1, 1.5]}
         gl={{
